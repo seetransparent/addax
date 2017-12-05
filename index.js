@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
  * Springbok: Utility to serve private S3 files through an HTTP server with token authentication.
  *
