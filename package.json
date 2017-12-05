@@ -1,0 +1,19 @@
+{
+  "name": "springbok",
+  "version": "1.0.0",
+  "description": "Proxy to serve presigned s3 downloads to authenticated users",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "springbok": "index.js"
+  },
+  "author": "Transparent Intelligence",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.12.2",
+    "express": "^4.16.2",
+    "lodash": "^4.17.4"
+  }
+}
