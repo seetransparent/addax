@@ -111,7 +111,6 @@ program
     console.log('  - rmuser <user>: remove a user token');
     console.log('  - sign <user> <filepath>: generates a shareable url for that user and filepath');
     console.log('  - start [port]: starts the server listeting at the specified port (3000 by default)');
-
   });
 
 // -------------------------
