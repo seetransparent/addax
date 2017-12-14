@@ -12,11 +12,13 @@
  */
 
 const _ = require('lodash');
+const fs = require('fs');
 const program = require('commander');
 const { randomBytes } = require('crypto');
-const config = require('./config.json');
 const startServer = require('./server.js');
 const { readAuthFile, writeAuthFile } = require('./authentication.js');
+
+let config;
 
 // -------------------------
 
@@ -100,4 +102,24 @@ program
     startServer({ port });
   });
 
-program.parse(process.argv);
+// -------------------------
+// entry point
+
+const configFile = './config.json';
+
+// first make sure that the config file exists in the curren dir
+fs.access(configFile, fs.constants.R_OK, (err) => {
+  if (err) return console.error('ERROR: config.json file not found in the current directory.');
+  // read the config file
+  fs.readFile(configFile, (err, file) => {
+    if (err) return console.log('[reading config.json] ERROR:', err);
+    try {
+      // parse the JSON file
+      config = JSON.parse(String(file));
+      // execute the cli command
+      program.parse(process.argv);
+    } catch (err) {
+      console.log('[parsing config.json] ERROR:', err);
+    }
+  });
+});
