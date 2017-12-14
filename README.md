@@ -1,6 +1,6 @@
 # Addax
 
-Simple HTTP proxy to serve private S3 files to authenticated clientes.
+Simple HTTP proxy to serve private S3 files to authenticated clients.
 
 ## Installation
 
@@ -10,14 +10,14 @@ npm install -g addax
 
 ## Getting started
 
-`addax` exposes the contentes of a (configurable) directory in S3 that act as
-the general root. The clients trying to access the files must authenticate
-themselves providing a token parameter in the url. Each token grants access to
-one (and only one) directory in the general root and all its subdirectories. If
-the request does not have a token or if the provided token does not match the
-directory in the file path, the request is denied. If the authentication is
-successful, `addax` will generate the corresponding s3 url for the requested
-file and answer with a redirection.
+`addax` exposes the contents of a (configurable) s3 bucket to HTTP clients. The
+clients trying to access the files must authenticate themselves providing a
+token parameter in the url. Each token grants (recursive) access to one (and
+only one) directory in the bucket. If the request does not have a token or if
+the provided token does not match the directory in the requested path, the
+request is denied. If the authentication is successful, `addax` will generate
+the corresponding presigned s3 url for the requested file and answer with a
+redirection.
 
 The commands `addax adduser <s3-user-directory>` and `addax rmuser
 <s3-user-directory>` are used to generate or remove a token for the given
@@ -28,14 +28,30 @@ Keep in mind that `<filepath>` should be *relative* to `<s3-user-directory>`.
 
 To start the server use `addax start <port>`.
 
+## Requirements
+
+`addax` uses the `aws` command line interface utilities to generate the presigned
+urls. For that reason, the `aws` command must be installed on the system and
+configured with the correct user account and region. The command `aws configure`
+provides an interactive wizard to set up this configuration.
+
 ## Configuration
 
-The host used for the generated signed urls and the general s3 root path must be
-specified in the file `config.json`.
+In addition to `aws`, `addax` need some configuration of its own. The host used
+for the generated signed urls and the s3 bucket must be specified in the file
+named `config.json` inside `addax`'s directory. This file is expected to have
+the following structure:
 
 ```json
 {
-  "rootPath": "root-s3-path",
+  "rootPath": "s3-bucket",
   "host": "localhost:3000"
 }
 ```
+
+The property `rootPath` can take just the name of the s3
+bucket(`"public-files"`), or a bucket and a path inside that bucket
+(`"files/shared/public"`).
+
+The property `host` is used by the `addax sign` command to generate signed urls.
+It should be the public domain or IP of the server running `addax`.
