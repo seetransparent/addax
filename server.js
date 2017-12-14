@@ -1,7 +1,6 @@
 const _ = require('lodash');
 const express = require('express');
 const { exec } = require('child_process');
-const config = require('./config.json');
 const { readAuthFile } = require('./authentication.js');
 
 // -------------------------
@@ -15,7 +14,7 @@ async function authenticateUser(token, rootDirectory) {
 // -------------------------
 // s3 presigning
 
-function presignPath(userDir, path) {
+function presignPath(config, userDir, path) {
   const s3path = `s3://${config.rootPath}/${userDir}/${path}`;
   const s3command = `aws s3 presign --expires-in 604800 ${s3path}`;
   return new Promise((resolve, reject) => {
@@ -30,7 +29,7 @@ function presignPath(userDir, path) {
 // -------------------------
 // webapp
 
-module.exports = (options = {}) => {
+module.exports = (config, options = {}) => {
   const app = express();
 
   app.get('/:root/*', async (req, res) => {
@@ -39,7 +38,7 @@ module.exports = (options = {}) => {
     if (root && path && token && await authenticateUser(token, root)) {
       try {
         console.log(`[${new Date()}][access]`, root, path);
-        res.redirect(await presignPath(root, path));
+        res.redirect(await presignPath(config, root, path));
       } catch (err) {
         console.error(`[${new Date()}][ERROR]`, err);
         res.sendStatus(500);

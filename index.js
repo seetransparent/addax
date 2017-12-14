@@ -99,7 +99,7 @@ program
   .command('start [port]')
   .action((port = 3000) => {
     console.log(` -> starting server on port ${port}`);
-    startServer({ port });
+    startServer(config, { port });
   });
 
 // -------------------------
