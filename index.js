@@ -102,6 +102,18 @@ program
     startServer(config, { port });
   });
 
+program
+  .command('*')
+  .action((env) => {
+    console.error('\n[addax] command not found:', env);
+    console.log('\nList of available commands:');
+    console.log('  - adduser <user>: register a new user token');
+    console.log('  - rmuser <user>: remove a user token');
+    console.log('  - sign <user> <filepath>: generates a shareable url for that user and filepath');
+    console.log('  - start [port]: starts the server listeting at the specified port (3000 by default)');
+
+  });
+
 // -------------------------
 // entry point
 
