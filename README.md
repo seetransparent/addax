@@ -1,4 +1,4 @@
-# Addax
+ Addax
 
 Simple HTTP proxy to serve private S3 files to authenticated clients.
 
@@ -21,10 +21,19 @@ redirection.
 
 The commands `addax adduser <s3-user-directory>` and `addax rmuser
 <s3-user-directory>` are used to generate or remove a token for the given
-directory.
+directory. <s3-user-directory> is the name of the directory stored in the root
+of the S3 bucket. It should not contain slashes.
+
+```javascript
+addax adduser user1
+```
 
 To generate a shareable url use `addax sign <s3-user-directory> <filepath>`.
 Keep in mind that `<filepath>` should be *relative* to `<s3-user-directory>`.
+
+```javascript
+addax sign user1 some/path/file.txt
+```
 
 To start the server use `addax start <port>`.
 
