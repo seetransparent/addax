@@ -9,8 +9,16 @@
   "bin": {
     "addax": "./index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seetransparent/addax"
+  },
   "author": "Transparent Intelligence",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seetransparent/addax/issues"
+  },
+  "homepage": "https://github.com/seetransparent/addax#readme",
   "dependencies": {
     "commander": "^2.12.2",
     "express": "^4.16.2",
