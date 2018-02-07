@@ -18,6 +18,19 @@
   "bugs": {
     "url": "https://github.com/seetransparent/addax/issues"
   },
+  "keywords": [
+    "amazon",
+    "aws",
+    "s3",
+    "sync",
+    "folder",
+    "directory",
+    "server",
+    "express",
+    "file",
+    "sign",
+    "upload"
+  ],
   "homepage": "https://github.com/seetransparent/addax#readme",
   "dependencies": {
     "commander": "^2.12.2",
