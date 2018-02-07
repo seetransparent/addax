@@ -1,6 +1,6 @@
 {
   "name": "addax",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Proxy to serve presigned s3 downloads to authenticated users",
   "main": "index.js",
   "scripts": {
