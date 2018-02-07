@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 /*
- * Springbok: Utility to serve private S3 files through an HTTP server with token authentication.
+ * addax: Utility to serve private S3 files through an HTTP server with token authentication.
  *
  * Commands:
- * - springbok adduser <user-directory>
- * - springbok rmuser <user-directory>
- * - springbok sign <user-directory> <path-relative-to-user-directory>
- * - springbok start 8080
+ * - addax adduser <user-directory>
+ * - addax rmuser <user-directory>
+ * - addax sign <user-directory> <path-relative-to-user-directory>
+ * - addax start 8080
  *
  */
 
