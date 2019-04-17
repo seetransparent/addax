@@ -64,3 +64,10 @@ bucket(`"public-files"`), or a bucket and a path inside that bucket
 
 The property `host` is used by the `addax sign` command to generate signed urls.
 It should be the public domain or IP of the server running `addax`.
+
+## Docker
+
+If you want to run the app with docker just run  `docker run addax -e AWS_ACCESS_KEY_ID=youraccesskey -e AWS_SECRET_ACCESS_KEY=yoursecretaccesskey`.
+**Remember** to have auth.json and config.json when you run, either way it will fail.
+
+Also if you dont want to build the container locally you can dowload addax from DockerHub https://hub.docker.com/r/seetransparent/addax
