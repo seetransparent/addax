@@ -35,6 +35,6 @@
   "dependencies": {
     "commander": "^2.12.2",
     "express": "^4.16.2",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.13"
   }
 }
