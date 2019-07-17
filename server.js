@@ -4,6 +4,18 @@ const { exec } = require('child_process');
 const { readAuthFile } = require('./authentication.js');
 
 // -------------------------
+// helpers
+
+function sanitizePath(path) {
+  if (!path) return path;
+  const illegalRe = /[\?<>\\:\*\|":;& ]/g;
+  const controlRe = /[\x00-\x1f\x80-\x9f]/g;
+  return path
+    .replace(illegalRe, '')
+    .replace(controlRe, '');
+}
+
+// -------------------------
 // authentication
 
 async function authenticateUser(token, rootDirectory) {
@@ -38,7 +50,7 @@ module.exports = (config, options = {}) => {
     if (root && path && token && await authenticateUser(token, root)) {
       try {
         console.log(`[${new Date()}][access]`, root, path);
-        res.redirect(await presignPath(config, root, path));
+        res.redirect(await presignPath(config, root, sanitizePath(path)));
       } catch (err) {
         console.error(`[${new Date()}][ERROR]`, err);
         res.sendStatus(500);
