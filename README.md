@@ -10,7 +10,7 @@ npm install -g addax
 
 ## Getting started
 
-`addax` exposes the contents of a (configurable) s3 bucket to HTTP clients. The
+`addax` exposes the contents of a (configurable) s3 (or MinIO) bucket to HTTP clients. The
 clients trying to access the files must authenticate themselves providing a
 token parameter in the url. Each token grants (recursive) access to one (and
 only one) directory in the bucket. If the request does not have a token or if
@@ -54,6 +54,7 @@ the following structure:
 ```json
 {
   "rootPath": "s3-bucket",
+  "endpoint": "http://user:pass@localhost:9000",
   "host": "localhost:3000"
 }
 ```
@@ -61,6 +62,9 @@ the following structure:
 The property `rootPath` can take just the name of the s3
 bucket(`"public-files"`), or a bucket and a path inside that bucket
 (`"files/shared/public"`).
+
+The property `endpoint` must be only included when pointing to a MinIO server.
+AWS S3 will be used as default if no endpoint is specified.
 
 The property `host` is used by the `addax sign` command to generate signed urls.
 It should be the public domain or IP of the server running `addax`.
