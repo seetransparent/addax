@@ -22,6 +22,7 @@
     "amazon",
     "aws",
     "s3",
+    "minio",
     "sync",
     "folder",
     "directory",

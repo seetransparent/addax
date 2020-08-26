@@ -28,7 +28,8 @@ async function authenticateUser(token, rootDirectory) {
 
 function presignPath(config, userDir, path) {
   const s3path = `s3://${config.rootPath}/${userDir}/${path}`;
-  const s3command = `aws s3 presign --expires-in 604800 ${s3path}`;
+  const endpoint = config.endpoint ? `--endpoint-url ${config.endpoint}` : '';
+  const s3command = `aws ${endpoint} s3 presign --expires-in 604800 ${s3path}`;
   return new Promise((resolve, reject) => {
     exec(s3command, (err, stdout, stderr) => {
       if (err) reject(err);
